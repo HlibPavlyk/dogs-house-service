@@ -1,0 +1,23 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{BB67FD96-F0A9-49C5-A301-9FE2C874A508}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "tests", "tests", "{0F4143E8-6F77-44EC-BAE6-1690B5255173}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DogsHouseService.Domain", "src\DogsHouseService.Domain\DogsHouseService.Domain.csproj", "{A6F88CB7-82AA-426F-BE46-98C5A375C11C}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{A6F88CB7-82AA-426F-BE46-98C5A375C11C} = {BB67FD96-F0A9-49C5-A301-9FE2C874A508}
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{A6F88CB7-82AA-426F-BE46-98C5A375C11C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A6F88CB7-82AA-426F-BE46-98C5A375C11C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A6F88CB7-82AA-426F-BE46-98C5A375C11C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A6F88CB7-82AA-426F-BE46-98C5A375C11C}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+EndGlobal
