@@ -10,4 +10,6 @@ public interface IDogRepository
     IQueryable<Dog> SortDogsQueryByAttributeAsync(IQueryable<Dog> query, string attribute, string order);
     Task<PagedResponse<Dog>?> GetPagedDogsFromQueryAsync(IQueryable<Dog> query, int page, int size);
     Task<IEnumerable<Dog>?> MaterializeDogsQueryAsync(IQueryable<Dog> query);
+    Task<bool> DogExistsAsync(string name);
+    Task SaveChangesAsync();
 }

@@ -81,4 +81,15 @@ public class DogRepository : IDogRepository
         return await query.
             ToListAsync();
     }
+    
+    public async Task<bool> DogExistsAsync(string name)
+    {
+        return await _context.Dogs
+            .AnyAsync(d => d.Name == name);
+    }
+    
+    public async Task SaveChangesAsync()
+    {
+        await _context.SaveChangesAsync();
+    }
 }

@@ -43,8 +43,20 @@ public class DogService : IDogService
         return await _dogRepository.MaterializeDogsQueryAsync(query);
     }
 
-    public Task AddAsync(DogCreateDto dogDto)
+    public async Task AddAsync(DogCreateDto dogDto)
     {
-        throw new NotImplementedException();
+        if (await _dogRepository.DogExistsAsync(dogDto.Name))
+            throw new InvalidOperationException($"A dog with the name '{dogDto.Name}' already exists.");
+
+        var dog = new Dog
+        {
+            Name = dogDto.Name,
+            Color = dogDto.Color,
+            TailLength = dogDto.TailLength,
+            Weight = dogDto.Weight
+        };
+
+        await _dogRepository.AddAsync(dog);
+        await _dogRepository.SaveChangesAsync();
     }
 }

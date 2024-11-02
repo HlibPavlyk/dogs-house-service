@@ -25,7 +25,7 @@ public class DogController : Controller
     
     [HttpGet]
     [Route("dogs")]
-    public async Task<object> GetAllDogsAsync([FromQuery] int? pageNumber, [FromQuery] int? pageSize, 
+    public async Task<IActionResult> GetAllDogsAsync([FromQuery] int? pageNumber, [FromQuery] int? pageSize, 
         [FromQuery] string? attribute, [FromQuery] string? order)
     {
         try
@@ -48,8 +48,19 @@ public class DogController : Controller
     
     [HttpPost]
     [Route("dog")]
-    public Task AddAsync([FromBody] DogCreateDto dogDto)
+    public async Task<IActionResult> AddAsync([FromBody] DogCreateDto dogDto)
     {
-        return _dogService.AddAsync(dogDto);
+        if (!ModelState.IsValid)
+            return BadRequest(ModelState);
+
+        try
+        {
+            await _dogService.AddAsync(dogDto);
+            return Created("dog", dogDto);
+        }
+        catch (InvalidOperationException ex)
+        {
+            return BadRequest(ex.Message);
+        }
     }
 }
