@@ -10,8 +10,4 @@
       <ProjectReference Include="..\DogsHouseService.Domain\DogsHouseService.Domain.csproj" />
     </ItemGroup>
 
-    <ItemGroup>
-      <Folder Include="Dtos\Dog\" />
-    </ItemGroup>
-
 </Project>
