@@ -1,7 +1,6 @@
 using DogsHouseService.Application.Abstractions.Repositories;
 using DogsHouseService.Application.Dtos.Other;
 using DogsHouseService.Domain.Entities;
-using DogsHouseService.Infrastructure.Helpers;
 using Microsoft.EntityFrameworkCore;
 
 namespace DogsHouseService.Infrastructure.Repositories;
@@ -10,7 +9,7 @@ public class DogRepository : IDogRepository
 {
     private readonly ApplicationDbContext _context;
 
-    protected DogRepository(ApplicationDbContext context)
+    public DogRepository(ApplicationDbContext context)
     {
         _context = context;
     }
@@ -21,17 +20,65 @@ public class DogRepository : IDogRepository
             .AddAsync(dog);
     }
 
-    public async Task<object?> GetAllAsync(SortByItemQueryDto? sortByItemQueryDto, PageQueryDto? pageQueryDto)
+    public IQueryable<Dog> GetAllAsQueryable()
     {
-        var query = _context.Dogs.AsNoTracking();
-
-        if (sortByItemQueryDto != null)
-            query = DogRepositoryHelper.SortDogsByAttributeAsync(query, sortByItemQueryDto.Attribute, sortByItemQueryDto.Order);
-
-        if (pageQueryDto != null)
-            return await DogRepositoryHelper.GetPagedEntitiesAsync(query, pageQueryDto.PageNumber, pageQueryDto.PageSize);
-    
-        return await query.ToListAsync();
+        return _context.Dogs.
+            AsNoTracking();
     }
- 
+
+    public IQueryable<Dog> SortDogsQueryByAttributeAsync(IQueryable<Dog> query,
+        string attribute, string order)
+    {
+        var isAscending = order switch
+        {
+            "asc" => true,
+            "desc" => false,
+            _ => throw new ArgumentException("Invalid order.")
+        };
+        
+        query = attribute switch
+        {
+            "name" => isAscending
+                ? query.OrderBy(x => x.Name)
+                : query.OrderByDescending(x => x.Name),
+            "color" => isAscending
+                ? query.OrderBy(x => x.Color)
+                : query.OrderByDescending(x => x.Color),
+            "tail_length" => isAscending
+                ? query.OrderBy(x => x.TailLength)
+                : query.OrderByDescending(x => x.TailLength),
+            "weight" => isAscending
+                ? query.OrderBy(x => x.Weight)
+                : query.OrderByDescending(x => x.Weight),
+            _ => throw new ArgumentException("Invalid attribute.")
+        };
+        
+        return query;
+    }
+    
+    public async Task<PagedResponse<Dog>?> GetPagedDogsFromQueryAsync(IQueryable<Dog> query,
+        int page, int size)
+    {
+        var totalItems = await query.CountAsync();
+        if (totalItems == 0)
+            return null;
+
+        var items = await query
+            .Skip((page - 1) * size)
+            .Take(size)
+            .ToListAsync();
+        
+        if (items.Count == 0)
+            return null;
+
+        var totalPages = (int)Math.Ceiling(totalItems / (double)size);
+
+        return new PagedResponse<Dog>(totalPages, items);
+    }
+
+    public async Task<IEnumerable<Dog>?> MaterializeDogsQueryAsync(IQueryable<Dog> query)
+    {
+        return await query.
+            ToListAsync();
+    }
 }

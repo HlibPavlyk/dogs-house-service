@@ -6,5 +6,8 @@ namespace DogsHouseService.Application.Abstractions.Repositories;
 public interface IDogRepository
 {
     Task AddAsync(Dog dog);
-    Task<object?> GetAllAsync(SortByItemQueryDto? sortByItemQueryDto, PageQueryDto? pageQueryDto);
+    IQueryable<Dog> GetAllAsQueryable();
+    IQueryable<Dog> SortDogsQueryByAttributeAsync(IQueryable<Dog> query, string attribute, string order);
+    Task<PagedResponse<Dog>?> GetPagedDogsFromQueryAsync(IQueryable<Dog> query, int page, int size);
+    Task<IEnumerable<Dog>?> MaterializeDogsQueryAsync(IQueryable<Dog> query);
 }
