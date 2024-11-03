@@ -12,6 +12,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DogsHouseService.Applicatio
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DogsHouseService.Api", "src\DogsHouseService.Api\DogsHouseService.Api.csproj", "{F267AB91-642A-407B-95FD-886D9D63B822}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DogHouseRepository.UnitTests", "tests\DogHouseRepository.UnitTests\DogHouseRepository.UnitTests.csproj", "{1687F780-A216-4660-B92D-BE53A4F7260B}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -22,6 +24,7 @@ Global
 		{224C5821-A94C-4A16-9FDA-607C22F852CD} = {BB67FD96-F0A9-49C5-A301-9FE2C874A508}
 		{EF4E1AA2-EF26-492D-A424-19860C74DA8B} = {BB67FD96-F0A9-49C5-A301-9FE2C874A508}
 		{F267AB91-642A-407B-95FD-886D9D63B822} = {BB67FD96-F0A9-49C5-A301-9FE2C874A508}
+		{1687F780-A216-4660-B92D-BE53A4F7260B} = {0F4143E8-6F77-44EC-BAE6-1690B5255173}
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
 		{A6F88CB7-82AA-426F-BE46-98C5A375C11C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
@@ -40,5 +43,9 @@ Global
 		{F267AB91-642A-407B-95FD-886D9D63B822}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{F267AB91-642A-407B-95FD-886D9D63B822}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{F267AB91-642A-407B-95FD-886D9D63B822}.Release|Any CPU.Build.0 = Release|Any CPU
+		{1687F780-A216-4660-B92D-BE53A4F7260B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1687F780-A216-4660-B92D-BE53A4F7260B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1687F780-A216-4660-B92D-BE53A4F7260B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1687F780-A216-4660-B92D-BE53A4F7260B}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal
